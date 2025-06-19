@@ -2,6 +2,7 @@ import FormInput from "../../components/form/FormInput";
 import { createAlert } from "../../utils/createAlert";
 import { useForm } from "react-hook-form";
 import axios from "axios";
+import Buttons from "../../components/form/Buttons";
 // rfce
 function Register() {
   // JS
@@ -9,7 +10,7 @@ function Register() {
   const { isSubmitting } = formState;
 
   const hdlSubmit = async (value) => {
-    await new Promise((resolve)=>setTimeout(resolve,2000))
+    await new Promise((resolve) => setTimeout(resolve, 2000));
 
     try {
       const res = await axios.post(
@@ -38,20 +39,10 @@ function Register() {
           </div>
 
           <div className="flex justify-center mt-4">
-
-
-            <button className="bg-black text-white p-2 rounded-md">
-             {
-              isSubmitting
-              ? '...Loading'
-              : 'Register'
-             }
-            </button>
-
-
-
-
+            <Buttons label="Register" isSubmitting={isSubmitting} />
           </div>
+
+          
         </form>
       </div>
     </div>
