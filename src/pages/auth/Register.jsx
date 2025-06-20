@@ -6,11 +6,12 @@ import Buttons from "../../components/form/Buttons";
 
 import { yupResolver } from "@hookform/resolvers/yup";
 import { registerSchema } from "../../utils/validator";
+import { actionRegister } from "../../api/auth";
 
 // rfce
 function Register() {
   // JS
-  const { handleSubmit, register, formState } = useForm({
+  const { handleSubmit, register, formState, reset } = useForm({
     resolver: yupResolver(registerSchema),
   });
   const { isSubmitting, errors } = formState;
@@ -20,12 +21,10 @@ function Register() {
     await new Promise((resolve) => setTimeout(resolve, 2000));
 
     try {
-      const res = await axios.post(
-        "http://localhost:8000/auth/register",
-        value
-      );
+      const res = await actionRegister(value);
       console.log(res);
       createAlert("success", res.data.message);
+      reset()
     } catch (error) {
       console.log(error);
       createAlert("info", error.response?.data?.message);
