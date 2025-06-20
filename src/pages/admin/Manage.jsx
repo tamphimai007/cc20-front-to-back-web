@@ -20,6 +20,10 @@ function Manage() {
     }
   };
 
+  const hdlUpdateRole = async (token, id, role) => {
+    console.log(token, id, role);
+  };
+
   return (
     <div>
       <table className="table-auto">
@@ -37,10 +41,22 @@ function Manage() {
           {users.map((item, index) => {
             return (
               <tr key={item.id}>
-                <td>{index+1}</td>
+                <td>{index + 1}</td>
                 <td>{item.name}</td>
                 <td>{item.email}</td>
-                <td>{item.role}</td>
+
+                <td>
+                  <select
+                    defaultValue={item.role}
+                    onChange={(e) =>
+                      hdlUpdateRole(token, item.id, e.target.value)
+                    }
+                  >
+                    <option>USER</option>
+                    <option>ADMIN</option>
+                  </select>
+                </td>
+
                 <td>Delete</td>
               </tr>
             );
