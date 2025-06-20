@@ -2,7 +2,10 @@
 import { CircleUserRound, LayoutDashboard } from "lucide-react";
 import { Link } from "react-router";
 import { sidebarLink } from "../../utils/links";
+import useAuthStore from "../../store/auth-store";
 function Sidebar() {
+  const user = useAuthStore((state) => state.user);
+//   console.log(user)
   return (
     <div className="bg-black w-48">
       {/* Profile */}
@@ -11,7 +14,7 @@ function Sidebar() {
       items-center"
       >
         <CircleUserRound size={48} />
-        <p>Welcome ...</p>
+        <p>Welcome {user && user.role}</p>
       </div>
 
       {/* NavLink */}
