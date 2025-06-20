@@ -1,5 +1,7 @@
 // rfce
 import { CircleUserRound, LayoutDashboard } from "lucide-react";
+import { Link } from "react-router";
+import { sidebarLink } from "../../utils/links";
 function Sidebar() {
   return (
     <div className="bg-black w-48">
@@ -13,12 +15,19 @@ function Sidebar() {
       </div>
 
       {/* NavLink */}
-      <div className="text-white flex gap-2 px-4 py-4">
-        <span>
-          <LayoutDashboard />
-        </span>
-        <p>Dashboard</p>
-      </div>
+      {sidebarLink.map((item) => {
+        return (
+          <Link
+            key={item.label}
+            to={item.link}
+            className="text-white flex gap-2
+       px-4 py-2 hover:bg-gray-400"
+          >
+            <span>{item.icon}</span>
+            <p>{item.label}</p>
+          </Link>
+        );
+      })}
     </div>
   );
 }
