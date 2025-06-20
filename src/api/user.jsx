@@ -15,5 +15,21 @@ export const actionListUsers = async (token) => {
   });
 };
 
+export const actionUpdateRole = async (token, id, role) => {
+  return await axios.patch("http://localhost:8000/api/user/role/" + id, role, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+
+export const actionDeleteUser = async (token, id) => {
+  return await axios.delete("http://localhost:8000/api/user/" + id, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+
 // export const actionRegister2 = async (value) =>
 //   await axios.post("http://localhost:8000/auth/register", value);
