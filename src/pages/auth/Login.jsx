@@ -7,10 +7,12 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema, registerSchema } from "../../utils/validator";
 import { actionLogin, actionRegister } from "../../api/auth";
 import useAuthStore from "../../store/auth-store";
+import { useNavigate } from "react-router";
 
 // rfce
 function Login() {
   // JS
+  const navigate = useNavigate()
   // Zustand
   const actionLoginWithZustand = useAuthStore((state)=>state.actionLoginWithZustand)
 
@@ -26,6 +28,7 @@ function Login() {
     if(res.success){
       console.log(res.role)
       createAlert("success","Welcome back")
+      roleRedirect(res.role)
     }else{
       createAlert('info',res.message)
     }
@@ -41,6 +44,16 @@ function Login() {
     //   createAlert("info", error.response?.data?.message);
     // }
   };
+
+  const roleRedirect = (role)=>{
+    if(role==="ADMIN"){
+      navigate('/admin')
+    }else{
+      navigate('/user')
+    }
+  }
+
+
   return (
     <div className="flex w-full h-full justify-end">
       {/* Card */}

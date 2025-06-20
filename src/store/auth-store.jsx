@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { actionLogin } from "../api/auth";
-
+import { persist } from "zustand/middleware";
 // 1. Create Store
 const authStore = (set) => ({
   token: null,
@@ -20,6 +20,6 @@ const authStore = (set) => ({
   },
 });
 // 2. UseStore
-const useAuthStore = create(authStore);
+const useAuthStore = create(persist(authStore, { name: "auth-store" }));
 
 export default useAuthStore;
